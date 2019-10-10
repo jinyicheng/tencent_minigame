@@ -11,7 +11,7 @@ class Common
      * @param $data
      * @param array $headers
      * @param int $timeout
-     * @return bool|string
+     * @return array
      * @throws HttpRequestException
      */
     public static function post($url, $data, $headers = [], $timeout = 200)
@@ -39,7 +39,7 @@ class Common
      * @param $data
      * @param array $headers
      * @param int $timeout
-     * @return bool|string
+     * @return array
      * @throws HttpRequestException
      */
     public static function get($url, $data, $headers = [], $timeout = 200)

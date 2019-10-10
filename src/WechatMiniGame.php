@@ -18,12 +18,19 @@ class WechatMiniGame extends Common
     private $options;
     private static $instance = [];
 
+    /**
+     * WechatMiniGame constructor.
+     * @param array $options
+     */
     private function __construct($options = [])
     {
         $this->options = $options;
         if (!extension_loaded('redis')) throw new BadFunctionCallException('Redis扩展不支持');
     }
 
+    /**
+     * @return WechatMiniGame
+     */
     public static function getInstance()
     {
         if (!class_exists('Config', false)) {
@@ -58,7 +65,7 @@ class WechatMiniGame extends Common
     }
 
     /**
-     * @return array
+     * @return string
      * @throws HttpRequestException
      * @throws HttpResponseException
      */
@@ -135,7 +142,7 @@ class WechatMiniGame extends Common
 
     /**
      * @param $js_code
-     * @return bool|array
+     * @return array
      * @throws HttpRequestException
      * @throws HttpResponseException
      */
@@ -211,7 +218,7 @@ class WechatMiniGame extends Common
      * @param bool $auto_color
      * @param array $line_color
      * @param bool $is_hyaline
-     * @return array|bool
+     * @return string
      * @throws HttpRequestException
      * @throws HttpResponseException
      * @throws Exception

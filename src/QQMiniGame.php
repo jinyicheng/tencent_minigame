@@ -14,12 +14,19 @@ class QQMiniGame extends Common
     private $options;
     private static $instance = [];
 
+    /**
+     * QQMiniGame constructor.
+     * @param array $options
+     */
     private function __construct($options = [])
     {
         $this->options = $options;
         if (!extension_loaded('redis')) throw new BadFunctionCallException('Redis扩展不支持');
     }
 
+    /**
+     * @return QQMiniGame
+     */
     public static function getInstance()
     {
         if (!class_exists('Config', false)) {
@@ -41,7 +48,7 @@ class QQMiniGame extends Common
     }
 
     /**
-     * @return bool|string
+     * @return string
      * @throws HttpRequestException
      * @throws HttpResponseException
      */
@@ -84,7 +91,7 @@ class QQMiniGame extends Common
 
     /**
      * @param $js_code
-     * @return bool|array
+     * @return array
      * @throws HttpRequestException
      * @throws HttpResponseException
      */
