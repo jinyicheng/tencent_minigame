@@ -1,0 +1,32 @@
+{
+  "name": "jinyicheng/tencent-minigame",
+  "description": "腾讯小游戏ThinkPHP5.0.*版",
+  "keywords": [
+    "tencent",
+    "mini game",
+    "thinkphp5.0.*"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "guojun",
+      "email": "492282937@qq.com"
+    },
+    {
+      "name": "jinyicheng",
+      "email": "234067496@qq.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.1.0",
+    "ext-redis": "*",
+    "topthink/framework": "5.0.*",
+    "aliyuncs/oss-sdk-php": "^2.3",
+    "jinyicheng/redis": "1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "jinyicheng\\tencent_minigame\\": "src/"
+    }
+  }
+}
