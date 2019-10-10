@@ -1,6 +1,6 @@
 <?php
 
-namespace tencent_minigame;
+namespace jinyicheng\tencent_minigame;
 
 use BadFunctionCallException;
 use Exception;
