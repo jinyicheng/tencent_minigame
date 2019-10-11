@@ -281,12 +281,12 @@ class WechatMiniGame extends Common
                 throw new UnexpectedValueException('未知类型文件' . $postResult['contentType'] . '无法确定存储文件后缀');
         }
         $filename = md5($postResult['buffer']) . $ext;
-        $real_file_path = $this->options['app_qrcode_cache_real_dir_path'] . DIRECTORY_SEPARATOR . $filename;
+
         $relative_file_path = $this->options['app_qrcode_cache_relative_dir_path'] . DIRECTORY_SEPARATOR . $filename;
         switch ($this->options['app_qrcode_cache_type']) {
             case 'oss':
                 /**
-                 * 执行本地文件至oss的迁移
+                 * 执行数据量到oss的远程文件生成
                  */
                 $ossClient = new OssClient(
                     $this->options['access_key_id'],
@@ -296,6 +296,10 @@ class WechatMiniGame extends Common
                 $ossClient->putObject($this->config['bucket'], $relative_file_path, $postResult['buffer']);
                 break;
             case 'local':
+                /**
+                 * 执行数据流到本地文件的生成
+                 */
+                $real_file_path = $this->options['app_qrcode_cache_real_dir_path'] . DIRECTORY_SEPARATOR . $filename;
                 if (file_put_contents($real_file_path, $postResult['buffer']) === false) {
                     throw new Exception('文件：' . $real_file_path . '写入失败');
                 }
