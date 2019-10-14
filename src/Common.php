@@ -2,7 +2,7 @@
 
 namespace jinyicheng\tencent_minigame;
 
-use HttpException;
+use Exception;
 
 class Common
 {
@@ -12,7 +12,7 @@ class Common
      * @param array $headers
      * @param int $timeout
      * @return array
-     * @throws HttpException
+     * @throws Exception
      */
     public static function post($url, $data, $headers = [], $timeout = 200)
     {
@@ -28,7 +28,7 @@ class Common
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
         if($httpCode!==200){
-            throw new HttpException('请求出错');
+            throw new Exception('请求出错',$httpCode);
         }else{
             return json_decode($response, true);
         }
@@ -40,7 +40,7 @@ class Common
      * @param array $headers
      * @param int $timeout
      * @return array
-     * @throws HttpException
+     * @throws Exception
      */
     public static function get($url, $data, $headers = [], $timeout = 200)
     {
@@ -54,7 +54,7 @@ class Common
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
         if($httpCode!==200){
-            throw new HttpException('请求出错');
+            throw new Exception('请求出错',$httpCode);
         }else{
             return json_decode($response, true);
         }

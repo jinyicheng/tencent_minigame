@@ -3,7 +3,7 @@
 namespace jinyicheng\tencent_minigame;
 
 use BadFunctionCallException;
-use HttpException;
+use Exception;
 use InvalidArgumentException;
 use think\Config;
 
@@ -48,8 +48,8 @@ class QQMiniGame extends Common
 
     /**
      * @return string
-     * @throws HttpException
-     * @throws HttpException
+     * @throws Exception
+     * @throws Exception
      */
     public function getAccessToken()
     {
@@ -80,7 +80,7 @@ class QQMiniGame extends Common
              */
             //返回状态：不成功，抛出异常
             if ($getResult['errcode'] != 0) {
-                throw new HttpException($getResult['errmsg'], $getResult['errcode']);
+                throw new Exception($getResult['errmsg'], $getResult['errcode']);
             }
             //在redis中保存access_token
             $redis->set($access_token_key, $getResult['access_token'], $getResult['expires_in']);
@@ -91,8 +91,7 @@ class QQMiniGame extends Common
     /**
      * @param $js_code
      * @return array
-     * @throws HttpException
-     * @throws HttpException
+     * @throws Exception
      */
     public function code2Session($js_code)
     {
@@ -115,7 +114,7 @@ class QQMiniGame extends Common
          */
         //返回状态：不成功，抛出异常
         if ($getResult['errcode'] != 0) {
-            throw new HttpException($getResult['errmsg'], $getResult['errcode']);
+            throw new Exception($getResult['errmsg'], $getResult['errcode']);
         }
         return [
             'open_id' => $getResult['openid'],
@@ -131,7 +130,7 @@ class QQMiniGame extends Common
      * @param $data
      * @param $emphasis_keyword
      * @return bool
-     * @throws HttpException
+     * @throws Exception
      */
     public function sendTemplateMessage($open_id, $template_id, $page, $form_id, $data, $emphasis_keyword)
     {
@@ -157,7 +156,7 @@ class QQMiniGame extends Common
         );
         //返回状态：不成功，抛出异常
         if ($postResult['errcode'] != 0) {
-            throw new HttpException($postResult['errmsg'], $postResult['errcode']);
+            throw new Exception($postResult['errmsg'], $postResult['errcode']);
         }
         return true;
     }
