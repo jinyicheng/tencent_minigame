@@ -20,10 +20,12 @@
   "require": {
     "php": ">=7.1.0",
     "ext-redis": "*",
-    "ext-http": "*",
     "topthink/framework": "5.0.*",
     "aliyuncs/oss-sdk-php": "^2.3",
-    "jinyicheng/redis": "1.0"
+    "jinyicheng/redis": "1.0",
+    "ext-curl": "*",
+    "ext-http": "*",
+    "ext-json": "*"
   },
   "autoload": {
     "psr-4": {

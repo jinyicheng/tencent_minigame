@@ -4,8 +4,7 @@ namespace jinyicheng\tencent_minigame;
 
 use BadFunctionCallException;
 use Exception;
-use HttpRequestException;
-use HttpResponseException;
+use HttpException;
 use InvalidArgumentException;
 use OSS\Core\OssException;
 use OSS\OssClient;
@@ -65,8 +64,8 @@ class WechatMiniGame extends Common
 
     /**
      * @return string
-     * @throws HttpRequestException
-     * @throws HttpResponseException
+     * @throws HttpException
+     * @throws HttpException
      */
     public function getAccessToken()
     {
@@ -97,7 +96,7 @@ class WechatMiniGame extends Common
              */
             //返回状态：不成功，抛出异常
             if ($getResult['errcode'] != 0) {
-                throw new HttpResponseException($getResult['errmsg'], $getResult['errcode']);
+                throw new HttpException($getResult['errmsg'], $getResult['errcode']);
             }
             //在redis中保存access_token
             $redis->set($access_token_key, $getResult['access_token'], $getResult['expires_in']);
@@ -109,8 +108,8 @@ class WechatMiniGame extends Common
      * @param $open_id
      * @param $session_key
      * @return bool
-     * @throws HttpRequestException
-     * @throws HttpResponseException
+     * @throws HttpException
+     * @throws HttpException
      */
     public function checkSessionKey($open_id, $session_key)
     {
@@ -134,7 +133,7 @@ class WechatMiniGame extends Common
          */
         //返回状态：不成功，抛出异常
         if ($getResult['errcode'] != 0) {
-            throw new HttpResponseException($getResult['errmsg'], $getResult['errcode']);
+            throw new HttpException($getResult['errmsg'], $getResult['errcode']);
         }
         return true;
     }
@@ -142,8 +141,8 @@ class WechatMiniGame extends Common
     /**
      * @param $js_code
      * @return array
-     * @throws HttpRequestException
-     * @throws HttpResponseException
+     * @throws HttpException
+     * @throws HttpException
      */
     public function code2Session($js_code)
     {
@@ -166,7 +165,7 @@ class WechatMiniGame extends Common
          */
         //返回状态：不成功，抛出异常
         if ($getResult['errcode'] != 0) {
-            throw new HttpResponseException($getResult['errmsg'], $getResult['errcode']);
+            throw new HttpException($getResult['errmsg'], $getResult['errcode']);
         }
         return [
             'open_id' => $getResult['openid'],
@@ -181,8 +180,8 @@ class WechatMiniGame extends Common
      * @param $page
      * @param $data
      * @return bool
-     * @throws HttpRequestException
-     * @throws HttpResponseException
+     * @throws HttpException
+     * @throws HttpException
      */
     public function sendTemplateMessage($open_id, $template_id, $page, $data)
     {
@@ -206,7 +205,7 @@ class WechatMiniGame extends Common
         );
         //返回状态：不成功，抛出异常
         if ($postResult['errcode'] != 0) {
-            throw new HttpResponseException($postResult['errmsg'], $postResult['errcode']);
+            throw new HttpException($postResult['errmsg'], $postResult['errcode']);
         }
         return true;
     }
@@ -218,8 +217,8 @@ class WechatMiniGame extends Common
      * @param array $line_color
      * @param bool $is_hyaline
      * @return string
-     * @throws HttpRequestException
-     * @throws HttpResponseException
+     * @throws HttpException
+     * @throws HttpException
      * @throws Exception
      */
     public function getQRCode($path, $width = 430, $auto_color = false, $line_color = ["r" => 0, "g" => 0, "b" => 0], $is_hyaline = false)
@@ -245,7 +244,7 @@ class WechatMiniGame extends Common
         );
         //返回状态：不成功，抛出异常
         if ($postResult['errcode'] != 0) {
-            throw new HttpResponseException($postResult['errmsg'], $postResult['errcode']);
+            throw new HttpException($postResult['errmsg'], $postResult['errcode']);
         }
         switch ($postResult['contentType']) {
             case 'image/jpeg':

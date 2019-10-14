@@ -3,8 +3,7 @@
 namespace jinyicheng\tencent_minigame;
 
 use BadFunctionCallException;
-use HttpRequestException;
-use HttpResponseException;
+use HttpException;
 use InvalidArgumentException;
 use think\Config;
 
@@ -49,8 +48,8 @@ class QQMiniGame extends Common
 
     /**
      * @return string
-     * @throws HttpRequestException
-     * @throws HttpResponseException
+     * @throws HttpException
+     * @throws HttpException
      */
     public function getAccessToken()
     {
@@ -81,7 +80,7 @@ class QQMiniGame extends Common
              */
             //返回状态：不成功，抛出异常
             if ($getResult['errcode'] != 0) {
-                throw new HttpResponseException($getResult['errmsg'], $getResult['errcode']);
+                throw new HttpException($getResult['errmsg'], $getResult['errcode']);
             }
             //在redis中保存access_token
             $redis->set($access_token_key, $getResult['access_token'], $getResult['expires_in']);
@@ -92,8 +91,8 @@ class QQMiniGame extends Common
     /**
      * @param $js_code
      * @return array
-     * @throws HttpRequestException
-     * @throws HttpResponseException
+     * @throws HttpException
+     * @throws HttpException
      */
     public function code2Session($js_code)
     {
@@ -116,7 +115,7 @@ class QQMiniGame extends Common
          */
         //返回状态：不成功，抛出异常
         if ($getResult['errcode'] != 0) {
-            throw new HttpResponseException($getResult['errmsg'], $getResult['errcode']);
+            throw new HttpException($getResult['errmsg'], $getResult['errcode']);
         }
         return [
             'open_id' => $getResult['openid'],
@@ -132,8 +131,7 @@ class QQMiniGame extends Common
      * @param $data
      * @param $emphasis_keyword
      * @return bool
-     * @throws HttpRequestException
-     * @throws HttpResponseException
+     * @throws HttpException
      */
     public function sendTemplateMessage($open_id, $template_id, $page, $form_id, $data, $emphasis_keyword)
     {
@@ -159,7 +157,7 @@ class QQMiniGame extends Common
         );
         //返回状态：不成功，抛出异常
         if ($postResult['errcode'] != 0) {
-            throw new HttpResponseException($postResult['errmsg'], $postResult['errcode']);
+            throw new HttpException($postResult['errmsg'], $postResult['errcode']);
         }
         return true;
     }
