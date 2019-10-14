@@ -52,7 +52,6 @@ class WechatMiniGame extends Common
                 if (!isset($options['app_qrcode_cache_oss_end_point'])) throw new InvalidArgumentException('tencent配置下没有找到app_qrcode_cache_oss_end_point设置');
                 if (!isset($options['app_qrcode_cache_oss_bucket'])) throw new InvalidArgumentException('tencent配置下没有找到app_qrcode_cache_oss_bucket设置');
             }
-            if (!isset($options['app_qrcode_cache_path'])) throw new InvalidArgumentException('tencent配置下没有找到app_qrcode_cache_path设置');
             if (!is_dir($options['app_qrcode_cache_real_dir_path'])) throw new InvalidArgumentException('tencent配置下app_qrcode_cache_real_dir_path路径无效');
             if (!isset($options['app_qrcode_cache_relative_dir_path'])) throw new InvalidArgumentException('tencent配置下app_qrcode_cache_relative_dir_path路径无效');
             if (!isset($options['app_qrcode_request_url_prefix'])) throw new InvalidArgumentException('tencent配置下没有找到app_qrcode_request_url_prefix设置');
