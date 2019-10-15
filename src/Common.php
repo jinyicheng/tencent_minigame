@@ -27,7 +27,7 @@ class Common
         $response = curl_exec($ch);//运行curl
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
-        if($httpCode!==200){
+        if($httpCode!=200){
             throw new Exception('请求出错',$httpCode);
         }else{
             return json_decode($response, true);
@@ -53,7 +53,7 @@ class Common
         $response = curl_exec($ch);//运行curl
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
-        if($httpCode!==200){
+        if($httpCode!=200){
             throw new Exception('请求出错',$httpCode);
         }else{
             return json_decode($response, true);

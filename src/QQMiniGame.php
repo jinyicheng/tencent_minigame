@@ -28,17 +28,13 @@ class QQMiniGame extends Common
      */
     public static function getInstance()
     {
-        if (!class_exists('Config', false)) {
-            throw new BadFunctionCallException('ThinkPHP Config类不存在');
-        } else {
-            $options = Config::get('tencent');
-            if ($options === false || $options === []) throw new InvalidArgumentException('tencent配置不存在');
-            if (!isset($options['app_id'])) throw new InvalidArgumentException('tencent配置下没有找到app_id设置');
-            if (!isset($options['app_secret'])) throw new InvalidArgumentException('tencent配置下没有找到app_secret设置');
-            if (!isset($options['app_token'])) throw new InvalidArgumentException('tencent配置下没有找到app_token设置');
-            if (!isset($options['app_redis_cache_db_number'])) throw new InvalidArgumentException('tencent配置下没有找到app_redis_cache_db_number设置');
-            if (!isset($options['app_redis_cache_key_prefix'])) throw new InvalidArgumentException('tencent配置下没有找到app_redis_cache_key_prefix设置');
-        }
+        $options = Config::get('tencent');
+        if ($options === false || $options === []) throw new InvalidArgumentException('tencent配置不存在');
+        if (!isset($options['app_id'])) throw new InvalidArgumentException('tencent配置下没有找到app_id设置');
+        if (!isset($options['app_secret'])) throw new InvalidArgumentException('tencent配置下没有找到app_secret设置');
+        if (!isset($options['app_token'])) throw new InvalidArgumentException('tencent配置下没有找到app_token设置');
+        if (!isset($options['app_redis_cache_db_number'])) throw new InvalidArgumentException('tencent配置下没有找到app_redis_cache_db_number设置');
+        if (!isset($options['app_redis_cache_key_prefix'])) throw new InvalidArgumentException('tencent配置下没有找到app_redis_cache_key_prefix设置');
         $hash = md5(json_encode($options));
         if (!isset(self::$instance[$hash])) {
             self::$instance[$hash] = new self($options);
@@ -118,7 +114,8 @@ class QQMiniGame extends Common
         }
         return [
             'open_id' => $getResult['openid'],
-            'session_key' => $getResult['session_key']
+            'session_key' => $getResult['session_key'],
+            'union_id' => (isset($getResult['unionid'])) ? $getResult['unionid'] : ''
         ];
     }
 
