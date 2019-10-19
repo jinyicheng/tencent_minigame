@@ -83,7 +83,7 @@ class WechatMiniGame extends Common
                     'grant_type' => 'client_credential'
                 ],
                 [],
-                200
+                2000
             );
             /**
              * 处理返回结果
@@ -120,7 +120,7 @@ class WechatMiniGame extends Common
                 'sig_method' => 'hmac_sha256'
             ],
             [],
-            200
+            2000
         );
         /**
          * 处理返回结果
@@ -152,7 +152,7 @@ class WechatMiniGame extends Common
                 'grant_type' => 'authorization_code'
             ],
             [],
-            200
+            2000
         );
         /**
          * 处理返回结果
@@ -195,7 +195,7 @@ class WechatMiniGame extends Common
                 'data' => $data
             ],
             [],
-            200
+            2000
         );
         //返回状态：不成功，抛出异常
         if ($postResult['errcode'] != 0) {
@@ -234,7 +234,7 @@ class WechatMiniGame extends Common
                 'is_hyaline' => (bool)$is_hyaline
             ],
             [],
-            200
+            2000
         );
         //返回状态：不成功，抛出异常
         if ($postResult['errcode'] != 0) {

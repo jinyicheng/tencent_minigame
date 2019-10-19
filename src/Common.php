@@ -14,7 +14,7 @@ class Common
      * @return array
      * @throws Exception
      */
-    public static function post($url, $data, $headers = [], $timeout = 200)
+    public static function post($url, $data, $headers = [], $timeout = 2000)
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);//抓取指定网页
@@ -42,7 +42,7 @@ class Common
      * @return array
      * @throws Exception
      */
-    public static function get($url, $data, $headers = [], $timeout = 200)
+    public static function get($url, $data, $headers = [], $timeout = 2000)
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url . '?' . http_build_query($data));//抓取指定网页

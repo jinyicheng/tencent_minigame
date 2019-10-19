@@ -69,7 +69,7 @@ class QQMiniGame extends Common
                     'grant_type' => 'client_credential'
                 ],
                 [],
-                200
+                2000
             );
             /**
              * 处理返回结果
@@ -103,7 +103,7 @@ class QQMiniGame extends Common
                 'grant_type' => 'authorization_code'
             ],
             [],
-            200
+            2000
         );
         /**
          * 处理返回结果
@@ -149,7 +149,7 @@ class QQMiniGame extends Common
                 'emphasis_keyword' => $emphasis_keyword
             ],
             [],
-            200
+            2000
         );
         //返回状态：不成功，抛出异常
         if ($postResult['errcode'] != 0) {
