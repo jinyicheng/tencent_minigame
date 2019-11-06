@@ -188,13 +188,15 @@ class WechatMiniGame extends Common
          */
         $postResult = parent::post(
             "https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=" . $access_token,
-            [
+            json_encode([
                 'touser' => $open_id,
                 'template_id' => $template_id,
                 'page' => $page,
                 'data' => $data
+            ]),
+            [
+                'Content-Type:application/json;charset=utf-8'
             ],
-            [],
             2000
         );
         //返回状态：不成功，抛出异常
