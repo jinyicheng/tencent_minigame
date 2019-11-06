@@ -39,7 +39,7 @@ class TouTiaoMiniGame extends Common
         if (!isset($options['app_redis_cache_db_number'])) throw new InvalidArgumentException('tencent配置下没有找到app_redis_cache_db_number设置');
         if (!isset($options['app_redis_cache_key_prefix'])) throw new InvalidArgumentException('tencent配置下没有找到app_redis_cache_key_prefix设置');
         if (!isset($options['app_qrcode_cache_type'])) throw new InvalidArgumentException('tencent配置下没有找到app_qrcode_cache_type设置');
-        if (in_array($options['app_qrcode_cache_type'], ['oss', 'local'])) throw new InvalidArgumentException('tencent配置下app_qrcode_cache_type参数无效仅支持：oss或local');
+        if (!in_array($options['app_qrcode_cache_type'], ['oss', 'local'])) throw new InvalidArgumentException('tencent配置下app_qrcode_cache_type参数无效仅支持：oss或local');
         if ($options['app_qrcode_cache_type'] == 'oss') {
             if(!Config::has('oss'))throw new InvalidArgumentException('oss配置不存在');
             $options=array_merge($options,Config::get('oss'));
@@ -80,7 +80,7 @@ class TouTiaoMiniGame extends Common
              * 请求接口
              */
             $getResult = parent::get(
-                "https://developer.mini_series.com/api/apps/token",
+                "https://developer.toutiao.com/api/apps/token",
                 [
                     'appid' => $this->options['app_id'],
                     'secret' => $this->options['app_secret'],
@@ -114,7 +114,7 @@ class TouTiaoMiniGame extends Common
          * 请求接口
          */
         $getResult = parent::get(
-            "https://developer.mini_series.com/api/apps/jscode2session",
+            "https://developer.toutiao.com/api/apps/jscode2session",
             ($js_code != '') ? [
                 'appid' => $this->options['app_id'],
                 'secret' => $this->options['app_secret'],
@@ -156,7 +156,7 @@ class TouTiaoMiniGame extends Common
          * 请求接口
          */
         $postResult = parent::post(
-            "https://developer.mini_series.com/api/apps/game/template/send",
+            "https://developer.toutiao.com/api/apps/game/template/send",
             json_encode([
                 'access_token' => $this->getAccessToken(),
                 'touser' => $open_id,
@@ -199,7 +199,7 @@ class TouTiaoMiniGame extends Common
          * 请求接口
          */
         $postResult = self::post(
-            "https://developer.mini_series.com/api/apps/qrcode",
+            "https://developer.toutiao.com/api/apps/qrcode",
             [
                 'access_token' => $this->getAccessToken(),
                 'appname' => $app_name,
