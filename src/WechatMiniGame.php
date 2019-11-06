@@ -5,6 +5,7 @@ namespace jinyicheng\tencent_minigame;
 use BadFunctionCallException;
 use Exception;
 use InvalidArgumentException;
+use jinyicheng\redis\Redis;
 use OSS\Core\OssException;
 use OSS\OssClient;
 use think\Config;
@@ -41,7 +42,6 @@ class WechatMiniGame extends Common
         if (!isset($options['app_qrcode_cache_type'])) throw new InvalidArgumentException('tencent配置下没有找到app_qrcode_cache_type设置');
         if (in_array($options['app_qrcode_cache_type'], ['oss', 'local'])) throw new InvalidArgumentException('tencent配置下app_qrcode_cache_type参数无效仅支持：oss或local');
         if ($options['app_qrcode_cache_type'] == 'oss') {
-            if (!class_exists('OssClient', false)) throw new BadFunctionCallException('OSS OssClient类不存在');
             if (!isset($options['app_qrcode_cache_oss_access_key_id'])) throw new InvalidArgumentException('tencent配置下没有找到app_qrcode_cache_oss_access_key_id设置');
             if (!isset($options['app_qrcode_cache_oss_access_key_secret'])) throw new InvalidArgumentException('tencent配置下没有找到app_qrcode_cache_oss_access_key_secret设置');
             if (!isset($options['app_qrcode_cache_oss_end_point'])) throw new InvalidArgumentException('tencent配置下没有找到app_qrcode_cache_oss_end_point设置');

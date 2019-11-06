@@ -5,6 +5,7 @@ namespace jinyicheng\tencent_minigame;
 use BadFunctionCallException;
 use Exception;
 use InvalidArgumentException;
+use jinyicheng\redis\Redis;
 use think\Config;
 
 class QQMiniGame extends Common
