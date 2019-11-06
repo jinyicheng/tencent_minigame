@@ -141,15 +141,17 @@ class QQMiniGame extends Common
          */
         $postResult = parent::post(
             "https://api.q.qq.com/api/json/template/send?access_token=" . $access_token,
-            [
+            json_encode([
                 'touser' => $open_id,
                 'template_id' => $template_id,
                 'page' => $page,
                 'form_id' => $form_id,
                 'data' => $data,
                 'emphasis_keyword' => $emphasis_keyword
+            ]),
+            [
+                'Content-Type:application/json;charset=utf-8'
             ],
-            [],
             2000
         );
         //返回状态：不成功，抛出异常
