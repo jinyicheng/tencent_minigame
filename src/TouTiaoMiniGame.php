@@ -131,8 +131,8 @@ class TouTiaoMiniGame extends Common
          * 处理返回结果
          */
         //返回状态：不成功，抛出异常
-        if ($getResult['err'] != 0) {
-            throw new Exception($getResult['errmsg'], $getResult['err']);
+        if ($getResult['error'] != 0) {
+            throw new Exception($getResult['errmsg'], $getResult['error']);
         }
         return [
             'openid' => (isset($getResult['openid'])) ? $getResult['openid'] : '',
